@@ -849,6 +849,7 @@ static int Usart1JudgeStr(void)
 
 	u8 u8Cmd;
 	u8 i;
+  int tmp = 0;
 	u8 str[8]			=
 	{
 		0
@@ -904,8 +905,10 @@ static int Usart1JudgeStr(void)
 				SysTask.WatchState[* (data + 2)].MotoTime = * (data + 7);
 				SysTask.Moto_Mode[* (data + 2)] = (MotoFR) * (data + 6);
 				SysTask.Moto_Time[* (data + 2)] = (MotoTime_e) * (data + 7);
-				SysTask.Moto_RunTime[* (data + 2)] = g_au16MoteTime[SysTask.Moto_Time[i]][1];
-				SysTask.Moto_WaitTime[* (data + 2)] = g_au16MoteTime[SysTask.Moto_Time[i]][2];
+				
+        tmp = SysTask.Moto_Time[* (data + 2)];
+				SysTask.Moto_RunTime[* (data + 2)] = g_au16MoteTime[tmp][1];
+				SysTask.Moto_WaitTime[* (data + 2)] = g_au16MoteTime[tmp][2];
 			}
 
 			SysTask.u16SaveTick = SAVE_TICK_TIME; //数据更新保存
